@@ -1,0 +1,36 @@
+{
+  "AWSEBDockerrunVersion": 2,
+  "containerDefinitions": [
+    {
+      "name": "client",
+      "image": "nobscs/multi-client",
+      "host": "client",
+      "essential": false
+    },
+    {
+      "name": "server",
+      "image": "nobscs/multi-server",
+      "host": "api",
+      "essential": false
+    },
+    {
+      "name": "worker",
+      "image": "nobscs/multi-worker",
+      "host": "worker",
+      "essential": false
+    },
+    {
+      "name": "nginx",
+      "image": "nobscs/multi-nginx",
+      "host": "nginx",
+      "essential": true,
+      "portMappings": [
+        {
+          "hostPort": 80,
+          "containerPort": 80
+        }
+      ],
+      "links": ["client", "server"]
+    }
+  ]
+}

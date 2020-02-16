@@ -22,3 +22,15 @@ after_success:
   - docker push nobscs/multi-server
   - docker push nobscs/multi-worker
   - docker push nobscs/multi-nginx
+
+deploy:
+  provider: elasticbeanstalk
+  region: us-east-2
+  app: multi-docker
+  env: MultiDocker-env
+  bucket_name: elasticbeanstalk-us-east-2-123391336772
+  bucket_path: docker-multi
+  on:
+    branch: master
+  access_key_id: $AWS_ACCESS_KEY
+  secret_acceess_key: $AWS_SECRET_KEY
